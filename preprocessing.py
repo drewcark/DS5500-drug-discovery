@@ -28,7 +28,12 @@ drug_names = pd.read_csv(drug_names_fp, sep='\t')
 
 # structure and metadata
 
+ddi["Y"] = ddi["Y"].astype("category")
+ddi["Map"] = ddi["Map"].astype("category")
+print(ddi["Y"].describe())
+
 # missing data 
+print(ddi[ddi.isnull().any(axis=1)])
 
 # anomalies 
 
@@ -36,7 +41,16 @@ drug_names = pd.read_csv(drug_names_fp, sep='\t')
 
 # distributions 
 
-# categorical data 
+# categorical data (Only for DDI dataset)
+
+interaction_counts = pd.DataFrame(ddi['Y'].value_counts().rename_axis('value').reset_index(name='count'))
+
+fig, ax = plt.subplots()
+
+ax.bar(interaction_counts["value"], interaction_counts["count"])
+
+ax.set_ylabel('Count')
+ax.set_title('Interaction type')
 
 # ethical considerations 
 
