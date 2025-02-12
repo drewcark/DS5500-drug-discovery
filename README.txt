@@ -29,3 +29,7 @@ but we plan to rectify that next. Relevant code can be found in DDI.ipynb, Data_
 
 Data can be found in "drugbank.zip" (or "drugbank.csv.zip"),
 "chembl_22_clean_1576904_sorted_std_final.csv.zip", and "drugs.txt"
+
+RUNNING THIS CODE:
+dependencies:
+pip install -r requirements.txt
