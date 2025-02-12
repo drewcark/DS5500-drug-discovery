@@ -1,9 +1,11 @@
 numpy
 pandas
-sklearn
+scikit-learn
 scipy
 seaborn
 matplotlib
 deepchem
 rdkit
+torch
+torch_geometric
 tensorflow
