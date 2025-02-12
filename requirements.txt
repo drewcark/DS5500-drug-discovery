@@ -1,0 +1,9 @@
+numpy
+pandas
+sklearn
+scipy
+seaborn
+matplotlib
+deepchem
+rdkit
+tensorflow
