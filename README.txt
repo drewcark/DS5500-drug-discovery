@@ -31,5 +31,21 @@ Data can be found in "drugbank.zip" (or "drugbank.csv.zip"),
 "chembl_22_clean_1576904_sorted_std_final.csv.zip", and "drugs.txt"
 
 RUNNING THIS CODE:
+
+cloning this repository:
+  navigate to your preferrred location and open a terminal window, and enter:
+    git clone https://github.com/drewcark/DS5500-drug-discovery/
+
+downloading and extracting data:
+  data can be downloaded from https://tdcommons.ai/multi_pred_tasks/ddi and https://www.kaggle.com/datasets/art3mis/chembl22?resource=download,
+  or data can be accessed from the Data Files section of this repository.
+
 dependencies:
-pip install -r requirements.txt
+  pip install -r requirements.txt
+
+running the program:
+  unzip the data files in Data Files
+  open a terminal window in the main folder
+  run "jupyter DDI.ipynb"
+  to see the project run on the full code and not just a subset, using server with appropriate processing power:
+    run "python DDI.py"
