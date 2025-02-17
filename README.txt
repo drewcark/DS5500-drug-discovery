@@ -46,6 +46,6 @@ dependencies:
 running the program:
   unzip the data files in Data Files
   open a terminal window in the main folder
-  run "jupyter DDI.ipynb"
+  run "jupyter notebook DDI.ipynb"
   to see the project run on the full code and not just a subset, using server with appropriate processing power:
     run "python DDI.py"
