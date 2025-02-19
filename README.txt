@@ -43,9 +43,9 @@ downloading and extracting data:
 dependencies:
   pip install -r requirements.txt
 
-running the program:
+to running the program:
   unzip the data files in Data Files
   open a terminal window in the main folder
   run "jupyter notebook DDI.ipynb"
   to see the project run on the full code and not just a subset, using server with appropriate processing power:
-    run "python DDI.py"
+  run "python DDI.py"
