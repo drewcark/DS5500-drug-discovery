@@ -46,6 +46,6 @@ dependencies:
 to running the program:
   unzip the data files in Data Files
   open a terminal window in the main folder
-  run "jupyter notebook DDI.ipynb"
-  to see the project run on the full code and not just a subset, using server with appropriate processing power:
-  run "python DDI.py"
+  run "feature_engineering.ipynb" for the feature engineering and simple GNN with individual features
+  run "DDI.py" for Morgan's Fingerprints and GNN with features and Morgan Fingerprints
+  run "MolGraphGNN.ipynb" for Molecular Graphs and GNN
