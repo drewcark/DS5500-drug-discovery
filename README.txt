@@ -50,7 +50,7 @@ to running the program:
   unzip the data files in Data Files
   open a terminal window in the main folder
   run "feature_engineering.ipynb" for the feature engineering and simple GNN with individual features
-  run "DDI_prep.py" for preprocessing of data with molecular features and Morgan Fingerprints (end product is "DDI_eq_feat.parquet" and "DDI_red_feat.parquet"
+  run "DDI_prep.py" for preprocessing of data with molecular features and Morgan Fingerprints (end product is "DDI_eq_feat.parquet" and "DDI_red_feat.parquet")
   run "DDI_model_compare.ipynb" for hyperparameter optimization of a deep feedforward neural network vs a graph neural network,
     both of which use datasets with molecular features and Morgan Fingerprints
   run "MolGraphGNN.ipynb" for Molecular Graphs and GNN
