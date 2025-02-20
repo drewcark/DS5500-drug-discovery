@@ -49,9 +49,10 @@ dependencies:
 to run the program:
   unzip the data files in Data Files
   open a terminal window in the main folder
-  to observe preprocessing, run "python DDI_prep.py" to obtain data with molecular features and Morgan Fingerprints
+  to observe preprocessing navigate to Data Preprocessing and run "python DDI_prep.py" to obtain data with molecular features and Morgan Fingerprints
 	-(end product is "DDI_eq_feat.parquet" and "DDI_red_feat.parquet")
-  run "jupyter notebook feature_engineering.ipynb" for the feature engineering and simple GNN with individual features
-  run "jupyter notebook DDI_model_compare.ipynb" for hyperparameter optimization of a deep feedforward neural network vs a graph neural network
+  navigate to Model Implementation, and:
+    run "jupyter notebook feature_engineering.ipynb" for the feature engineering and simple GNN with individual features
+    run "jupyter notebook DDI_model_compare.ipynb" for hyperparameter optimization of a deep feedforward neural network vs a graph neural network
   	-both of which use datasets with molecular features and Morgan Fingerprints
-  run "jupyter notebook MolGraphGNN.ipynb" for Molecular Graphs and GNN
+    run "jupyter notebook MolGraphGNN.ipynb" for Molecular Graphs and GNN
