@@ -34,11 +34,14 @@ RUNNING THIS CODE:
 
 cloning this repository:
   navigate to your preferrred location and open a terminal window, and enter:
-    git clone https://github.com/drewcark/DS5500-drug-discovery/
+    git clone https://github.com/drewcark/DS5500-drug-discovery.git
 
 downloading and extracting data:
   data can be downloaded from https://tdcommons.ai/multi_pred_tasks/ddi and https://www.kaggle.com/datasets/art3mis/chembl22?resource=download,
   or data can be accessed from the Data Files section of this repository.
+
+  processed datafiles (for "DDI_model_compare.ipynb" are in the main section: "DDI_eq_feat.parquet" and "DDI_red_feat.parquet"
+    -these data files have been reduced down to ~10000 rows and ~178000 rows respectively
 
 dependencies:
   pip install -r requirements.txt
@@ -47,5 +50,7 @@ to running the program:
   unzip the data files in Data Files
   open a terminal window in the main folder
   run "feature_engineering.ipynb" for the feature engineering and simple GNN with individual features
-  run "DDI.py" for Morgan's Fingerprints and GNN with features and Morgan Fingerprints
+  run "DDI_prep.py" for preprocessing of data with molecular features and Morgan Fingerprints (end product is "DDI_eq_feat.parquet" and "DDI_red_feat.parquet"
+  run "DDI_model_compare.ipynb" for hyperparameter optimization of a deep feedforward neural network vs a graph neural network,
+    both of which use datasets with molecular features and Morgan Fingerprints
   run "MolGraphGNN.ipynb" for Molecular Graphs and GNN
