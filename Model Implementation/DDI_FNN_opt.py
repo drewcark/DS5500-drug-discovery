@@ -271,35 +271,54 @@ def opt_hps(func, X, Y, epochs, batchsizes, layers, show_progress=False):
                 print(acc_grid)
 
     print(f"Optimal hyperparams: {best_epochs} epochs, {best_batchsize} batchsize, {best_layer} layers. F1: {best_f1}, Accuracy: {best_acc}")
-    return f1_grid, acc_grid, best_model
+    return f1_grid, acc_grid, best_model, best_epochs, best_batchsize, best_layer
 
 #initialize dataframe
 
 table2 = pq.read_table('..\\Data Files\\DDI_red_feat.parquet')
 df_red_feat = table2.to_pandas()
 
+df_y_codes = pd.DataFrame(df_red_feat['y'].value_counts()).sort_values("y").reset_index()
+df_y_codes['new_y'] = df_y_codes.index
+df_y_codes = df_y_codes.drop('count', axis=1)
+
+df_final = pd.DataFrame.merge(df_y_codes, df_red_feat, on='y', how="right")
+
 label_encoder = LabelEncoder()
 graph_red_feat_y = label_encoder.fit_transform(df_red_feat['y'])
-red_feat_y = to_categorical(df_red_feat['y'])
-red_feat_x = df_red_feat.iloc[:,2:]
+red_feat_y = to_categorical(df_final['new_y'])
+red_feat_x = df_final.iloc[:,3:]
+red_feat_x_only_fp = red_feat_x.iloc[:,:-10]
 
-dnn_epochs = [9,10, 11, 12]
-dnn_batchsizes = [250,275, 300, 325]
-dnn_layers = [1,2,3]
+dnn_epochs = [8,9,10,11]
+dnn_batchsizes = [250,275,300]
+dnn_layers = [2,3,4]
 
 #gnn_epochs = [5,6,7,8,9]
 #gnn_batchsizes = [100, 125,150, 175, 200, 225]
 
 #just reduced to top 20 categories
-dnn_grid_f1, dnn_grid_acc, dnn_model = opt_hps(DNN, red_feat_x, red_feat_y, dnn_epochs, dnn_batchsizes, dnn_layers, show_progress=True)
+dnn_grid_f1,dnn_grid_acc,dnn_model,ep,batch,layer = opt_hps(DNN, red_feat_x, red_feat_y, dnn_epochs, dnn_batchsizes, dnn_layers, show_progress=True)
 
+print("Comparing to only molecular fingerprint with same parameters:")
+
+mol_FP_model,mol_FP_f1,mol_FP_acc = DNN(red_feat_x_only_fp, red_feat_y, ep, batch, layer)
+print(f"F1: {mol_FP_f1}, Accuracy: {mol_FP_acc}")
+
+
+print("F1 Grid:")
 print(dnn_grid_f1)
+print("Accuracy grid")
 print(dnn_grid_acc)
 
 f1_path = "dnn_f1.parquet"
 acc_path = "dnn_acc.parquet"
-pq.write_table(dnn_grid_f1, f1_path, existing_data_behavior='overwrite_or_ignore')
-pq.write_table(dnn_grid_acc, acc_path, existing_data_behavior='overwrite_or_ignore')
+
+f1_table = pa.Table.from_pandas(dnn_grid_f1)
+acc_table = pa.Table.from_pandas(dnn_grid_acc)
+
+pq.write_table(f1_table, f1_path, existing_data_behavior='overwrite_or_ignore')
+pq.write_table(acc_table, acc_path, existing_data_behavior='overwrite_or_ignore')
 
 #just reduced
 #gnn_grid_red, gnn_model = opt_hps(perform_GNN, red_feat_x.values, graph_red_feat_y, gnn_epochs, gnn_batchsizes, show_progress=True)
