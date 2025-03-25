@@ -117,11 +117,11 @@ def DNN(X, Y, Epochs, batchsize, layernum=1, verbose=False):
     
     model.compile(optimizer='adam',
               loss='categorical_crossentropy',
-              metrics=['accuracy','AUC','precision','recall'])
+              metrics=['accuracy','AUC','precision','recall',keras.metrics.CategoricalAccuracy()])
     
     model.fit(X_train, y_train, epochs=Epochs, batch_size=batchsize, validation_split=0.1, verbose=verbose)
     
-    loss, accuracy, AUC, precision, recall = model.evaluate(X_test, y_test, verbose=0)
+    loss, accuracy, AUC, precision, recall, cat_acc = model.evaluate(X_test, y_test, verbose=0)
     f1_score = 2 * (precision * recall) / (precision + recall)
     if verbose:
         print(f"Test Loss: {loss}")
@@ -129,6 +129,9 @@ def DNN(X, Y, Epochs, batchsize, layernum=1, verbose=False):
         print(f"Test AUC: {AUC}")
         print(f"Test Precision: {precision}")
         print(f"Test Recall: {recall}")
+        print(f"Test F1: {f1_score}")
+        print(f"Test Cat Accuracy:")
+        print(cat_acc)
     return model, f1_score, accuracy
 
     #Creating GNN Model
@@ -291,13 +294,14 @@ red_feat_x = df_final.iloc[:,3:]
 red_feat_x_only_fp = red_feat_x.iloc[:,:-10]
 
 dnn_epochs = [8,9,10,11]
-dnn_batchsizes = [250,275,300]
+dnn_batchsizes = [1000,1250,1500,1750,2000]
 dnn_layers = [2,3,4]
 
 #gnn_epochs = [5,6,7,8,9]
 #gnn_batchsizes = [100, 125,150, 175, 200, 225]
 
 #just reduced to top 20 categories
+
 dnn_grid_f1,dnn_grid_acc,dnn_model,ep,batch,layer = opt_hps(DNN, red_feat_x, red_feat_y, dnn_epochs, dnn_batchsizes, dnn_layers, show_progress=True)
 
 print("Comparing to only molecular fingerprint with same parameters:")
@@ -319,6 +323,18 @@ acc_table = pa.Table.from_pandas(dnn_grid_acc)
 
 pq.write_table(f1_table, f1_path, existing_data_behavior='overwrite_or_ignore')
 pq.write_table(acc_table, acc_path, existing_data_behavior='overwrite_or_ignore')
+
+
+
+#test example of DNN
+#batches = [250, 500, 1000, 1500, 2000]
+#models = [0]*len(batches)
+#f1s = [0]*len(batches)
+#accs = [0]*len(batches)
+#for i in range(0,len(batches)):
+    #models[i], f1s[i], accs[i] = DNN(red_feat_x, red_feat_y, 9, batches[i], 3, True)
+#print(f"F1 scores: {f1s}")
+#print(f"Accuracies: {accs}")
 
 #just reduced
 #gnn_grid_red, gnn_model = opt_hps(perform_GNN, red_feat_x.values, graph_red_feat_y, gnn_epochs, gnn_batchsizes, show_progress=True)
