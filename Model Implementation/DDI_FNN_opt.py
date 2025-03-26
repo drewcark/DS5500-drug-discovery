@@ -293,8 +293,8 @@ red_feat_y = to_categorical(df_final['new_y'])
 red_feat_x = df_final.iloc[:,3:]
 red_feat_x_only_fp = red_feat_x.iloc[:,:-10]
 
-dnn_epochs = [8,9,10,11]
-dnn_batchsizes = [1000,1250,1500,1750,2000]
+dnn_epochs = [10,11,12]
+dnn_batchsizes = [750,1000,1250]
 dnn_layers = [2,3,4]
 
 #gnn_epochs = [5,6,7,8,9]
@@ -321,9 +321,8 @@ acc_path = "dnn_acc.parquet"
 f1_table = pa.Table.from_pandas(dnn_grid_f1)
 acc_table = pa.Table.from_pandas(dnn_grid_acc)
 
-pq.write_table(f1_table, f1_path, existing_data_behavior='overwrite_or_ignore')
-pq.write_table(acc_table, acc_path, existing_data_behavior='overwrite_or_ignore')
-
+pq.write_table(f1_table, f1_path)
+pq.write_table(acc_table, acc_path)
 
 
 #test example of DNN
