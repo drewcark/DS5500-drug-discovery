@@ -32,6 +32,8 @@ from torch_geometric.loader import DataLoader
 from torch_geometric.data import Data
 import pyarrow.parquet as pq
 import pyarrow as pa
+import sqlalchemy
+import pyodbc
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 #quick function to turn a list of size 1 lists of strings into a list of strings, for later use
@@ -197,19 +199,24 @@ eq_df['col'] = eq_df.index
 eq_df_feat = ddi_featurize(eq_df, "X1","X2")
 eq_df_feat.drop(['X1', 'X2', 'w'], axis=1, inplace=True)
 
-print("eq featurized")
 
 red_df_feat = ddi_featurize(reduced_df, "X1","X2")
 red_df_feat.drop(['X1', 'X2', 'w'], axis=1, inplace=True)
 
-print("red featurized")
+df_y_codes = pd.DataFrame(red_df_feat['y'].value_counts()).sort_values("y").reset_index()
+df_y_codes['new_y'] = df_y_codes.index
+df_y_codes = df_y_codes.drop('count', axis=1)
 
 eq_table = pa.Table.from_pandas(eq_df_feat)
 pq.write_table(eq_table, 'DDI_eq_feat.parquet')
 
-print("eq written")
-
 red_table = pa.Table.from_pandas(red_df_feat)
 pq.write_table(red_table, 'DDI_red_feat.parquet')
 
-print("red written")
+# Database connection string (replace with your credentials)
+
+engine = sqlalchemy.create_engine("mysql+pyodbc://admin:group7@DDI")
+
+# Insert DataFrame into SQL table
+interaction_types.to_sql('interactions', engine, if_exists='replace', index=False)
+df_y_codes.to_sql('y_codes', engine, if_exists='replace', index=False)
