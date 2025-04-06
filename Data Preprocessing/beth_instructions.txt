@@ -1,0 +1,8 @@
+first, dowload mysql server at https://dev.mysql.com/downloads/mysql/5.5.html?os=3&version=5 and run
+then download mysql workbench at https://dev.mysql.com/downloads/workbench/ and run
+
+then open DDI_database.sql from github in MySQL workbench and run (the lightning bolt icon)
+then execute "pip install sqlalchemy mysql-connector-python" in command line
+then execute "python ddi_prep_for_beth.py" in command line
+
+database should be set up!
