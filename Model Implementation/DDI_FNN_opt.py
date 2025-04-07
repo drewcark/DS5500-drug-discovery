@@ -281,6 +281,7 @@ def opt_hps(func, X, Y, epochs, batchsizes, layers, show_progress=False):
 table2 = pq.read_table('..\\Data Files\\DDI_red_feat.parquet')
 df_red_feat = table2.to_pandas()
 
+#coding y into reduced values of top 20.
 df_y_codes = pd.DataFrame(df_red_feat['y'].value_counts()).sort_values("y").reset_index()
 df_y_codes['new_y'] = df_y_codes.index
 df_y_codes = df_y_codes.drop('count', axis=1)
@@ -315,9 +316,10 @@ print(dnn_grid_f1)
 print("Accuracy grid")
 print(dnn_grid_acc)
 
+
+#write parquet files of table results
 f1_path = "dnn_f1.parquet"
 acc_path = "dnn_acc.parquet"
-
 f1_table = pa.Table.from_pandas(dnn_grid_f1)
 acc_table = pa.Table.from_pandas(dnn_grid_acc)
 
@@ -325,25 +327,7 @@ pq.write_table(f1_table, f1_path)
 pq.write_table(acc_table, acc_path)
 
 
-#test example of DNN
-#batches = [250, 500, 1000, 1500, 2000]
-#models = [0]*len(batches)
-#f1s = [0]*len(batches)
-#accs = [0]*len(batches)
-#for i in range(0,len(batches)):
-    #models[i], f1s[i], accs[i] = DNN(red_feat_x, red_feat_y, 9, batches[i], 3, True)
-#print(f"F1 scores: {f1s}")
-#print(f"Accuracies: {accs}")
-
-#just reduced
-#gnn_grid_red, gnn_model = opt_hps(perform_GNN, red_feat_x.values, graph_red_feat_y, gnn_epochs, gnn_batchsizes, show_progress=True)
-
-#print(gnn_grid_red)
-
+#save model as pickle file
 filename = 'dnn_model_red.pkl'
 with open(filename, 'wb') as file:
     pickle.dump(dnn_model, file)
-
-#filename = 'gnn_model_red.pkl'
-#with open(filename, 'wb') as file:
-#    pickle.dump(gnn_model, file)
