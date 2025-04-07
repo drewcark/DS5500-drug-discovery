@@ -293,8 +293,8 @@ red_feat_y = to_categorical(df_final['new_y'])
 red_feat_x = df_final.iloc[:,3:]
 red_feat_x_only_fp = red_feat_x.iloc[:,:-10]
 
-dnn_epochs = [10,11,12]
-dnn_batchsizes = [750,1000,1250]
+dnn_epochs = [10,11,12,13]
+dnn_batchsizes = [1000,1250,1500]
 dnn_layers = [2,3,4]
 
 #gnn_epochs = [5,6,7,8,9]
