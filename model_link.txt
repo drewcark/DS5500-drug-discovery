@@ -1,1 +1,3 @@
-https://www.dropbox.com/scl/fi/kon0wt2p463j7d29yhc8i/dnn_model_red.pkl?rlkey=1or49zok8ky0u2q487lyk5q0z&st=bq620s7s&dl=0
+pickle: https://www.dropbox.com/scl/fi/kon0wt2p463j7d29yhc8i/dnn_model_red.pkl?rlkey=1or49zok8ky0u2q487lyk5q0z&st=bq620s7s&dl=0
+
+keras: https://www.dropbox.com/scl/fi/f8q15o3msnekjtkm1g56q/dnn_model_red.keras?rlkey=gqesfrt192hccnk6n9s0s85b6&st=sp6619yy&dl=0
