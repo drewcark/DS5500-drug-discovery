@@ -9,3 +9,6 @@ rdkit
 torch
 torch_geometric
 tensorflow
+pyarrow
+pickle
+streamlit
