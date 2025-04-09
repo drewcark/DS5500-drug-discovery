@@ -58,7 +58,7 @@ to run the program:
     run "jupyter notebook MolGraphGNN.ipynb" for Molecular Graphs and GNN
 
 to run gui:
-download dnn_model_red.keras from model.txt
+download dnn_model_red.keras from model_link.txt
 open gui.py, drugbank.csv, chembl_22_clean_1576904_sorted_std_final.csv and dnn_model_red.keras.
 open terminal in the application you are running in.
 run "streamlit run gui.py"
