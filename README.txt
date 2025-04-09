@@ -46,7 +46,7 @@ downloading and extracting data:
 dependencies:
   pip install -r requirements.txt
 
-to run the program:
+to run the model analysis:
   unzip the data files in Data Files
   open a terminal window in the main folder
   to observe preprocessing navigate to Data Preprocessing and run "python DDI_prep.py" to obtain data with molecular features and Morgan Fingerprints
