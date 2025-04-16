@@ -272,11 +272,11 @@ graph_red_feat_y = label_encoder.fit_transform(df_red_feat['y'])
 red_feat_y = to_categorical(df_red_feat['y'])
 red_feat_x = df_red_feat.iloc[:,2:]
 
-dnn_epochs = [7,8,9,10,11]
-dnn_batchsizes = [150, 200, 250, 300, 350, 400]
+dnn_epochs = [8,9,10,11,12]
+dnn_batchsizes = [500, 750, 1000, 1250, 1500]
 
 gnn_epochs = [5,6,7,8,9]
-gnn_batchsizes = [100, 125,150, 175, 200, 225]
+gnn_batchsizes = [200, 300, 400, 500, 600]
 
 #just reduced to top 20 categories
 dnn_grid_red, dnn_model = opt_hps(DNN, red_feat_x, red_feat_y, dnn_epochs, dnn_batchsizes, show_progress=True)
