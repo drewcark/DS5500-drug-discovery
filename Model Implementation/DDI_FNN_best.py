@@ -301,7 +301,7 @@ red_feat_x = df_final.iloc[:,3:]
 red_feat_x_only_fp = red_feat_x.iloc[:,:-10]
 
 dnn_epochs = [10,11,12]
-dnn_batchsizes = [1250]
+dnn_batchsizes = [1000]
 dnn_layers = [2,3]
 
 
